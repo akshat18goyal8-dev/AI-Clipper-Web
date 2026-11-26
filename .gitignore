@@ -1,0 +1,16 @@
+.venv/
+__pycache__/
+*.py[cod]
+*.db
+*.sqlite
+.env
+backend/storage/
+backend/app/storage/
+backend/assets/audio/*.wav
+backend/app/assets/audio/*.wav
+backend/.pytest_cache/
+frontend/node_modules/
+frontend/.next/
+frontend/out/
+frontend/next-env.d.ts
+*.log
