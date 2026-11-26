@@ -1,12 +1,13 @@
-FROM node:20-alpine AS builder
-WORKDIR /app
-COPY package*.json ./
-RUN npm ci
-COPY . .
-RUN npm run build
-
 FROM node:20-alpine
 WORKDIR /app
-COPY --from=builder /app ./
+
+COPY package*.json ./
+RUN npm ci
+
+COPY . .
+ARG NEXT_PUBLIC_API_URL=http://localhost:8000
+ENV NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL}
+RUN npm run build
+
 EXPOSE 3000
-CMD ["npm", "start"]
+CMD ["sh", "-c", "npx next start -H 0.0.0.0 -p ${PORT:-3000}"]
